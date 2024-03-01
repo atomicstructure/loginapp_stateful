@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
-      onSaved: (newValue) => print('Email: $newValue'),
+      onSaved: (newValue) => print('$newValue'),
     );
   }
 
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return null;
       },
       onSaved: (newValue) {
-        print('Password: $newValue');
+        print('$newValue');
       },
     );
   }
