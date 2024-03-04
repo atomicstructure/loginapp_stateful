@@ -9,7 +9,7 @@ class LoginScreen extends StatefulWidget {
 
 mixin ValidationMixin {
   String? validateEmail(value) {
-    if (value!.isEmpty || !value.contains('@, .')) {
+    if (value!.isEmpty || !value.contains('@') || !value.contains('.')) {
       return 'Please enter your email correctly.';
     }
     return null;
