@@ -7,7 +7,23 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+mixin ValidationMixin {
+  String? validateEmail(value) {
+    if (value!.isEmpty || !value.contains('@, .')) {
+      return 'Please enter your email correctly.';
+    }
+    return null;
+  }
+
+  String? validatePassword(value) {
+    if (value!.isEmpty || value.length < 8) {
+      return 'Please make sure your password is at least 8 characters long.';
+    }
+    return null;
+  }
+}
+
+class _LoginScreenState extends State<LoginScreen> with ValidationMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -48,12 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         labelText: 'Email',
         hintText: 'Email address here...',
       ),
-      validator: (value) {
-        if (value!.isEmpty || !value.contains('@') || !value.contains('.')) {
-          return 'Please enter your email correctly.';
-        }
-        return null;
-      },
+      validator: validateEmail,
       onSaved: (newValue) {
         email = newValue!;
       },
@@ -70,12 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
         labelText: 'Password',
         hintText: 'Input password here...',
       ),
-      validator: (value) {
-        if (value!.isEmpty || value.length < 8) {
-          return 'Please make sure your password is at least 8 characters long.';
-        }
-        return null;
-      },
+      validator: validatePassword,
       onSaved: (newValue) {
         password = newValue!;
       },
